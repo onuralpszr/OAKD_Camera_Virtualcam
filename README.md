@@ -18,7 +18,17 @@ git submodule update --init --recursive
 
 - DepthAi-Core
 - OpenCV
+- v4l2loopback
 
+## Installing Prerequisites
+
+### Fedora 
+
+v4l2loopback can be install after add RPMFusion repository (https://rpmfusion.org/Configuration)
+
+```
+dnf install -y opencv v4l2loopback akmod-v4l2loopback libusb1
+```
 
 ## Building
 
@@ -34,4 +44,10 @@ cmake --build . --parallel
 To run the example application 'DepthAiWebcam', navigate to build directory and run 'DepthAiWebcam' executable
 ```
 ./DepthAiWebcam
+```
+
+## Create Virtual Webcam with v4l2loopback
+
+```
+sudo modprobe -r v4l2loopback && sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="Virtual OAK-D" exclusive_caps=1 max_buffers=2
 ```

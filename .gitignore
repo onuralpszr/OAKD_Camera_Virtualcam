@@ -36,7 +36,7 @@
 .vscode/
 
 # Cmake folders
-cmake*/
+cmake-build*/
 build/
 
 # Hunter files
