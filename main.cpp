@@ -11,9 +11,9 @@
 #include <opencv2/opencv.hpp>
 
 
-#define VID_WIDTH  1200
-#define VID_HEIGHT 720
-#define VIDEO_OUT "/dev/video10"
+#define VID_WIDTH  1360
+#define VID_HEIGHT 768
+#define VIDEO_OUT "/dev/video11"
 
 
 int main(){
