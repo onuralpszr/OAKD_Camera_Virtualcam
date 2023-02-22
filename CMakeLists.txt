@@ -4,7 +4,9 @@ set(CMAKE_CXX_STANDARD 20)
 # Add depthai-core dependency
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/depthai-core EXCLUDE_FROM_ALL)
 find_package(OpenCV REQUIRED)
+find_package(CLI11 CONFIG REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
+include_directories(${CLI11_DIR}/include)
 
 project(DepthAiWebcam)
 add_executable(DepthAiWebcam main.cpp)

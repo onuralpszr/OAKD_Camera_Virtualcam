@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/videodev2.h>
+#include <string>
 
 // include depthai library
 #include <depthai/depthai.hpp>
@@ -10,28 +11,42 @@
 // include opencv library
 #include <opencv2/opencv.hpp>
 
+// include CLI library
+#include <CLI/CLI.hpp>
 
-#define VID_WIDTH  1360
-#define VID_HEIGHT 768
-#define VIDEO_OUT "/dev/video11"
+#define VIDEO_OUT "/dev/video"
 
 
-int main(){
+int main(int argc, char **argv){
+
+    CLI::App app{"DepthAI Webcam"};
+    app.add_flag("-p,--print", "Print configuration and exit")->configurable(false);
+
+    int videoDeviceNum = 11;
+    int videoWidth = 1360;
+    int videoHeight = 768;
+    app.add_option("-v,--virtualDevice", videoDeviceNum, "Virtual video device number");
+    app.add_option("-x,--width", videoWidth, "Video Width");
+    app.add_option("-y,--height", videoHeight, "Video Height");
+
+    CLI11_PARSE(app, argc, argv);
 
     dai::Pipeline pipeline;
     std::shared_ptr<dai::node::ColorCamera> colorCam = pipeline.create<dai::node::ColorCamera>();
     std::shared_ptr<dai::node::XLinkOut> xlinkOut = pipeline.create<dai::node::XLinkOut>();
     colorCam->setColorOrder(dai::ColorCameraProperties::ColorOrder::RGB);
     colorCam->setResolution(dai::ColorCameraProperties::SensorResolution::THE_4_K);
-    colorCam->setPreviewSize(VID_WIDTH,VID_HEIGHT);
+    colorCam->setPreviewSize(videoWidth,videoHeight);
 
     xlinkOut->setStreamName("Camera");
     colorCam->setInterleaved(true);
     colorCam->preview.link(xlinkOut->input);
     colorCam->setFps(60);
 
+
+    std::string videoDevice = VIDEO_OUT + std::to_string(videoDeviceNum);
     // open output device
-    int output = open(VIDEO_OUT, O_RDWR);
+    int output = open(videoDevice.c_str(), O_RDWR);
     if(output < 0) {
         std::cerr << "ERROR: could not open output device!\n" << strerror(errno);
         return -2;
@@ -39,7 +54,7 @@ int main(){
 
 
     // Configure parameters for output device
-    struct v4l2_format vid_format;
+    struct v4l2_format vid_format{};
     memset(&vid_format, 0, sizeof(vid_format));
     vid_format.type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
 
@@ -49,9 +64,9 @@ int main(){
         return -1;
     }
 
-    size_t frameSize = VID_WIDTH * VID_HEIGHT * 3;
-    vid_format.fmt.pix.width = VID_WIDTH;
-    vid_format.fmt.pix.height = VID_HEIGHT;
+    size_t frameSize = videoWidth * videoHeight * 3;
+    vid_format.fmt.pix.width = videoWidth;
+    vid_format.fmt.pix.height = videoHeight;
     vid_format.fmt.pix.pixelformat = V4L2_PIX_FMT_RGB24;
     vid_format.fmt.pix.sizeimage = frameSize;
     vid_format.fmt.pix.field = V4L2_FIELD_NONE;
