@@ -1,0 +1,19 @@
+name: Ubuntu CI Build
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  ubuntu-ci-work:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Installing devel packages
+        run: sudo apt-get install libopencv-dev python3-opencv libtbb-dev v4l2loopback-dkms build-essential cmake libcli11-dev libusb-1.0-0-dev libusb-1.0-0 -y
+      - name: Build DepthAiWebcam
+        run: |
+          mkdir -p build && cd build
+          cmake ..
+          cmake --build . --parallel
+      
+

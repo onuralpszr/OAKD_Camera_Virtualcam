@@ -1,0 +1,31 @@
+
+name: Fedora-37 CI Build
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  fedora-ci-job:
+    runs-on: ubuntu-latest
+    container: fedora:37
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Fedora dnf update
+        run: dnf update -y 
+
+      - name: Adding free rpmfusion repository
+        run: dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+
+      - name: Adding non-free rpmfusion repository
+        run: sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+
+      - name: Installing devel packages
+        run: sudo dnf install akmod-v4l2loopback opencv-devel gcc gcc-c++ cmake cli11-devel opencv libusb1 libusb1-devel git -y
+
+      - name: Build DepthAiWebcam
+        run: |
+          mkdir -p build && cd build
+          cmake ..
+          cmake --build . --parallel
+      
+
