@@ -41,3 +41,7 @@ build/
 
 # Hunter files
 hunter-archive.tar.gz
+.cmake_build/
+
+# Clang files
+compile_commands.json
