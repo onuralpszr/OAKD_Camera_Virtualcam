@@ -6,9 +6,7 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/depthai-core EXCLUDE_FROM_ALL)
 
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-
-find_package(CLI11 CONFIG REQUIRED)
-include_directories(${CLI11_DIR}/include)
+include_directories(include)
 
 project(DepthAiWebcam)
 add_executable(DepthAiWebcam main.cpp)
