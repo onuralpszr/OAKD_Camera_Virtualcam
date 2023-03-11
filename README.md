@@ -72,21 +72,21 @@ Note: Make sure to have the latest versions of all the packages installed to avo
 ## Building
 
 Configure and build
-```
+```sh
 mkdir -p build && cd build
 cmake ..
-cmake --build . --parallel
+cmake --build . --parallel $(($(nproc) - 1))
 ```
 
 ## Create Virtual Webcam with v4l2loopback
 
-```
+```sh
 sudo modprobe -r v4l2loopback && sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="Virtual OAK-D" exclusive_caps=1 max_buffers=2
 ```
 ## Running
 
 To run the example application 'DepthAiWebcam', navigate to build directory and run 'DepthAiWebcam' executable
-```
+```sh
 ./DepthAiWebcam
 ```
 
