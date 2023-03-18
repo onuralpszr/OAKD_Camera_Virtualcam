@@ -27,7 +27,7 @@ jobs:
       - name: Build DepthAiWebcam
         run: |
           mkdir -p build && cd build
-          cmake ..
+          cmake ../src
           cmake --build . --parallel 4
       
 
