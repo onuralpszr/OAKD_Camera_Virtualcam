@@ -10,11 +10,14 @@ jobs:
         with:
           submodules: 'recursive'
       
+      - name: apt update
+        run: sudo apt update
+      - name: apt upgrade
+        run: sudo apt upgrade -y
       - name: Installing devel packages
-        run: sudo apt-get install libopencv-dev python3-opencv libtbb-dev v4l2loopback-dkms build-essential cmake libcli11-dev libusb-1.0-0-dev libusb-1.0-0 -y
+        run: sudo apt-get install libopencv-dev git python3-opencv libtbb-dev v4l2loopback-dkms build-essential cmake libcli11-dev libusb-1.0-0-dev libusb-1.0-0 -y
       - name: Build DepthAiWebcam
         run: |
-          cd src/
           mkdir -p build && cd build
           cmake ../src
           cmake --build . --parallel 4
