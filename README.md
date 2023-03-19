@@ -6,6 +6,8 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/onuralpszr/OAKD_Camera_Virtualcam)
 ![cpp](https://img.shields.io/badge/C++20-Project-blue.svg?style=flat&logo=c%2B%2B)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+[![Fedora-37 CI Build](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/fedora-ci.yml/badge.svg)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/fedora-ci.yml)
+[![Ubuntu CI Build](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/ubuntu-ci.yml/badge.svg)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/ubuntu-ci.yml)
 [![Fedora](https://img.shields.io/badge/Fedora-51A2DA.svg?logo=fedora&logoColor=white)](https://getfedora.org/)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-FE7A16.svg?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
 
