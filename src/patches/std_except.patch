@@ -1,0 +1,12 @@
+diff --git a/include/depthai/xlink/XLinkStream.hpp b/include/depthai/xlink/XLinkStream.hpp
+index f358fd94..48f3b117 100644
+--- a/include/depthai/xlink/XLinkStream.hpp
++++ b/include/depthai/xlink/XLinkStream.hpp
+@@ -13,6 +13,7 @@
+ #include <unordered_map>
+ #include <utility>
+ #include <vector>
++#include <stdexcept>
+ 
+ // libraries
+ #include <XLink/XLinkPublicDefines.h>
