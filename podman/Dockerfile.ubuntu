@@ -7,7 +7,7 @@ ENV TZ=Etc/Utc
 RUN apt update
 RUN apt upgrade -y
 RUN apt-get install ssh gcc g++ clang rsync tar python3 libopencv-dev python3-opencv libtbb-dev git v4l2loopback-dkms build-essential cmake libcli11-dev libusb-1.0-0-dev libusb-1.0-0 -y
- 
+
 RUN useradd -ms /bin/bash ubuntu
 WORKDIR /home/ubuntu
 USER ubuntu
@@ -21,4 +21,4 @@ RUN cd /home/ubuntu/src && git clone https://github.com/luxonis/depthai-core.git
 RUN cd /home/ubuntu/src/depthai-core && git submodule update --init --recursive
 
 RUN cd /home/ubuntu/src && mkdir build && cd build && cmake ..
-RUN cd /home/ubuntu/src/build && cmake --build . --parallel $(($(nproc) - 1)) 
+RUN cd /home/ubuntu/src/build && cmake --build . --parallel $(($(nproc) - 1))

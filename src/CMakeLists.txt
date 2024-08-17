@@ -16,4 +16,3 @@ target_link_libraries(DepthAiWebcam depthai::opencv ${OpenCV_LIBS})
 
 # Set compiler features (c++17)
 set_property(TARGET ${TARGET_CORE_NAME} PROPERTY CXX_STANDARD 17)
-

@@ -6,9 +6,9 @@ jobs:
   fedora-ci-job:
     runs-on: ubuntu-latest
     container: fedora:latest
-    steps:      
+    steps:
       - name: Fedora dnf update
-        run: dnf update -y 
+        run: dnf update -y
 
       - name: Adding free rpmfusion repository
         run: dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
@@ -29,5 +29,3 @@ jobs:
           mkdir -p build && cd build
           cmake ../src
           cmake --build . --parallel 4
-      
-
