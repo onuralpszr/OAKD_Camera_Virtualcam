@@ -1,15 +1,15 @@
 # OAK-D Webcam Project (Linux Only)
 
-![GitHub](https://img.shields.io/github/license/onuralpszr/OAKD_Camera_Virtualcam?color=blue)
-[![Open issue](https://img.shields.io/github/issues/onuralpszr/OAKD_Camera_Virtualcam)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/issues)
-[![Closed issue](https://img.shields.io/github/issues-closed/onuralpszr/OAKD_Camera_Virtualcam)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/issues)
-![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/onuralpszr/OAKD_Camera_Virtualcam)
-![cpp](https://img.shields.io/badge/C++20-Project-blue.svg?style=flat&logo=c%2B%2B)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+![GitHub](https://img.consoleields.io/github/license/onuralpszr/OAKD_Camera_Virtualcam?color=blue)
+[![Open issue](https://img.consoleields.io/github/issues/onuralpszr/OAKD_Camera_Virtualcam)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/issues)
+[![Closed issue](https://img.consoleields.io/github/issues-closed/onuralpszr/OAKD_Camera_Virtualcam)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/issues)
+![GitHub pull requests](https://img.consoleields.io/github/issues-pr-raw/onuralpszr/OAKD_Camera_Virtualcam)
+![cpp](https://img.consoleields.io/badge/C++20-Project-blue.svg?style=flat&logo=c%2B%2B)
+[![Conventional Commits](https://img.consoleields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 [![Fedora-37 CI Build](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/fedora-ci.yml/badge.svg)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/fedora-ci.yml)
 [![Ubuntu CI Build](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/ubuntu-ci.yml/badge.svg)](https://github.com/onuralpszr/OAKD_Camera_Virtualcam/actions/workflows/ubuntu-ci.yml)
-[![Fedora](https://img.shields.io/badge/Fedora-51A2DA.svg?logo=fedora&logoColor=white)](https://getfedora.org/)
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-FE7A16.svg?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
+[![Fedora](https://img.consoleields.io/badge/Fedora-51A2DA.svg?logo=fedora&logoColor=white)](https://getfedora.org/)
+[![Ubuntu](https://img.consoleields.io/badge/Ubuntu-FE7A16.svg?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
 
 The goal of this project is to use the OAK-D camera, a special AI camera, as a webcam in Linux systems. The project will utilize the depthai-core library and v4l2loopback to create a virtual video device that can be accessed by any application that uses a webcam.
 
@@ -19,16 +19,17 @@ The project will involve setting up the OAK-D camera and installing the necessar
 
 Finally, we will test the virtual webcam device with various applications, such as video conferencing software, streaming software, and web browsers, to ensure compatibility and functionality.
 
-
 ## Depthai library dependencies
+
 - cmake >= 3.10
 - libusb1 development package
 - C/C++14 or above
- 
 
 ## Submodules
-Make sure submodules are initialized and updated 
-```
+
+Make sure submodules are initialized and updated
+
+```console
 git submodule update --init --recursive
 ```
 
@@ -49,19 +50,21 @@ To use the OAK-D camera as a webcam with v4l2loopback in Linux, you will need to
 
 You can install these packages on Ubuntu or Debian-based systems using the following command:
 
-### Ubuntu 
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-FE7A16.svg?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
+### Ubuntu
 
-```sh
+[![Ubuntu](https://img.consoleields.io/badge/Ubuntu-FE7A16.svg?logo=Ubuntu&logoColor=white)](https://ubuntu.com/)
+
+```console
 sudo apt-get install libopencv-dev v4l2loopback-dkms build-essential cmake libcli11-dev libusb-1.0-0-dev libusb-1.0-0
 ```
 
-### Fedora 
-[![Fedora](https://img.shields.io/badge/Fedora-51A2DA.svg?logo=fedora&logoColor=white)](https://getfedora.org/)
+### Fedora
+
+[![Fedora](https://img.consoleields.io/badge/Fedora-51A2DA.svg?logo=fedora&logoColor=white)](https://getfedora.org/)
 
 For Fedora, you can use the following commands to install the required packages:
 
-```sh
+```console
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf install akmod-v4l2loopback opencv-devel gcc gcc-c++ cmake cli11-devel opencv libusb1 libusb1-devel
@@ -74,7 +77,8 @@ Note: Make sure to have the latest versions of all the packages installed to avo
 ## Building
 
 Configure and build
-```sh
+
+```console
 mkdir -p build && cd build
 cmake ..
 cmake --build . --parallel $(($(nproc) - 1))
@@ -82,13 +86,14 @@ cmake --build . --parallel $(($(nproc) - 1))
 
 ## Create Virtual Webcam with v4l2loopback
 
-```sh
+```console
 sudo modprobe -r v4l2loopback && sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="Virtual OAK-D" exclusive_caps=1 max_buffers=2
 ```
+
 ## Running
 
 To run the example application 'DepthAiWebcam', navigate to build directory and run 'DepthAiWebcam' executable
-```sh
+
+```console
 ./DepthAiWebcam
 ```
-
