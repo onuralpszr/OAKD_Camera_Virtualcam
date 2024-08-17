@@ -1,11 +1,11 @@
 
-name: Fedora-37 CI Build
+name: Fedora CI Build
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   fedora-ci-job:
     runs-on: ubuntu-latest
-    container: fedora:37
+    container: fedora:latest
     steps:      
       - name: Fedora dnf update
         run: dnf update -y 
@@ -20,7 +20,7 @@ jobs:
         run: sudo dnf install akmod-v4l2loopback opencv-devel gcc gcc-c++ cmake cli11-devel opencv libusb1 libusb1-devel git -y
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
 

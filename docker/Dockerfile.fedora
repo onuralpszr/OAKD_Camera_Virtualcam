@@ -1,4 +1,4 @@
-FROM fedora:37
+FROM fedora:latest
 
 RUN dnf update -y
 RUN dnf install gcc gcc-c++ python3 rsync tar cli11 cli11-devel clang opencv-devel opencv cmake git -y
