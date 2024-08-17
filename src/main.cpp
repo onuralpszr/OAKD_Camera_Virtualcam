@@ -4,14 +4,8 @@
 #include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
-
-// include depthai library
 #include <depthai/depthai.hpp>
-
-// include opencv library
 #include <opencv2/opencv.hpp>
-
-// include CLI library
 #include <CLI/CLI.hpp>
 
 #define VIDEO_OUT "/dev/video"
@@ -52,14 +46,12 @@ int main(int argc, char **argv) {
   colorCam->setFps(FPS);
 
   std::string videoDevice = VIDEO_OUT + std::to_string(videoDeviceNum);
-  // open output device
   int output = open(videoDevice.c_str(), O_RDWR);
   if (output < 0) {
     std::cerr << "ERROR: could not open output device!\n" << strerror(errno);
     return -2;
   }
 
-  // Configure parameters for output device
   struct v4l2_format vid_format {};
   memset(&vid_format, 0, sizeof(vid_format));
   vid_format.type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
@@ -82,27 +74,23 @@ int main(int argc, char **argv) {
   }
 
   try {
-    // Try connecting to device and start the pipeline
     dai::Device device(pipeline);
-    // Get output queue
     std::shared_ptr<dai::DataOutputQueue> preview =
         device.getOutputQueue("Camera");
 
     while (true) {
-
-      // Receive frame from device
+      
       std::shared_ptr<dai::ImgFrame> imgFrame = preview->get<dai::ImgFrame>();
       cv::Mat frameResult = cv::Mat(imgFrame->getHeight(), imgFrame->getWidth(),
                                     CV_8UC3, imgFrame->getData().data());
 
-      // Write frame to output device
+
       size_t written = write(output, frameResult.data, frameSize);
       if (written < 0) {
         std::cerr << "ERROR: could not write to output device!\n";
         close(output);
         break;
       }
-      // Wait and check if 'q' pressed
       if (cv::waitKey(1) == 'q')
         return 0;
     }
@@ -110,7 +98,6 @@ int main(int argc, char **argv) {
     std::cout << err.what() << std::endl;
   }
 
-  // End stream
   if (ioctl(output, VIDIOC_STREAMOFF, &vid_format) < 0) {
     std::cout << "Could not end streaming, VIDIOC_STREAMOFF" << std::endl;
     return 1;
