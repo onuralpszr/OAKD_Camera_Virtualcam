@@ -26,7 +26,7 @@ Finally, we will test the virtual webcam device with various applications, such 
 Make sure submodules are initialized and updated
 
 ```console
-
+git clone https://github.com/onuralpszr/OAKD_Camera_Virtualcam.git
 git submodule update --init --recursive
 ```
 
