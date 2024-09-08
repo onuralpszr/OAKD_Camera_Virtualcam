@@ -76,6 +76,7 @@ Note: Make sure to have the latest versions of all the packages installed to avo
 Configure and build
 
 ```console
+cd OAKD_Camera_Virtualcam/src
 mkdir -p build && cd build
 cmake ..
 cmake --build . --parallel $(($(nproc) - 1))
